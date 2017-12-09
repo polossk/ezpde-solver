@@ -7,7 +7,6 @@ boundary_script = @(x) ((x == mesh_config.xr) .* cos(1));
 
 basis_config.type = 101;
 basis_config.nums = 2;
-basis_config.diff_order = 1;
 basis_config.gauss_order = 3;
 
 pde_config.coef_fun = @(x) exp(x);
