@@ -3,6 +3,24 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Status](https://img.shields.io/badge/status-工事現場-red.svg)
 
+## Usage
+- copy all codes and subfolder to your workspace directly.
+- add `include(package_path)` in your code, where the default value of `package_path` is `'.\ezpde-solver\'`.
+
+### Workspace Example
+
+```plain
++ Workspace\
+|
++--- your_code_1.m
++--- your_code_2.m
++---+ ezpde-solver\
+|   |
+|   +--- error_module\
+|   +--- ...
+| ...
+```
+
 ## Note
 - Homework of Mathematical Foundation of Finite Element Methods
 - Naive FEM code, easy to use but no guarantee of its effectiveness

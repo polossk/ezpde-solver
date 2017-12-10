@@ -1,5 +1,5 @@
-function [w, x] = gauss_int_coefs( flag )
-	switch flag
+function [w_gauss, x_gauss] = gauss_int_coefs(a, b, flag)
+    switch flag
         case 2
             x = [-0.7745966692, 0.0000000000, 0.7745966692];
             w = [ 0.5555555556, 0.8888888888, 0.5555555556];
@@ -30,4 +30,8 @@ function [w, x] = gauss_int_coefs( flag )
             w = 0; errbnd = 'out of function abilitity.';
             error(errbnd);
     end
+    g = @(t) ((b - a) / 2 * t);
+    X = @(t) (g(t) + (b + a) / 2);
+    w_gauss = g(w);
+    x_gauss = X(x);
 end

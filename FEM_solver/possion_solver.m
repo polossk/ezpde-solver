@@ -17,10 +17,22 @@ function [sol, pde_config] = possion_solver(pde_config)
 	A = assemble_matrix_1D(sol.mesh_femesh, basis_config, coef_fun);
 	b = assemble_vector_1D(sol.mesh_femesh, basis_config, f_fun);
 	[A, b] = treat_dirichlet_boundary(A, b, boundary, sol.mesh_femesh);
-
+	
 	sol.sol = full(A\b)';
-	sol.sol_exact = pde_config.exact_sol((sol.mesh_femesh.pb));
-	sol.err = loss_fun(sol.sol, sol.sol_exact);
+	sol.sol_exact = pde_config.exact_sol_script((sol.mesh_femesh.pb));
+	
+	lmethod = pde_config.loss.method;
+	if strcmp(lmethod, 'custom')
+		sol.err = pde_config.loss.loss_fun(sol.sol, sol.sol_exact);
+	elseif strcmp(lmethod, 'L_inf')
+		sol.err = calc_inf_error(sol, pde_config);
+	elseif strcmp(lmethod, 'L2')
+		sol.err = calc_l2_error(sol, pde_config);
+	elseif strcmp(lmethod, 'H1')
+		sol.err = calc_h1_error(sol, pde_config);
+	else
+		warning(['No implementation.']);
+	end
 
 	pde_config.boundary = boundary;
 end

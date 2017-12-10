@@ -1,3 +1,4 @@
+include('.');
 mesh_config.xl = 0;
 mesh_config.xr = 1;
 mesh_config.h = 1.0/64;
@@ -11,7 +12,7 @@ basis_config.gauss_order = 3;
 
 pde_config.coef_fun = @(x) exp(x);
 pde_config.f_fun = @(x) (-exp(x) .* (cos(x) - 2 * sin(x) - x .* cos(x) - x .* sin(x))); 
-pde_config.exact_sol = @(x) (x .* cos(x));
+pde_config.exact_sol_script = @(x) (x .* cos(x));
 pde_config.loss_fun = @(x, y) max(abs(x - y));
 
 pde_config.mesh_config = mesh_config;
