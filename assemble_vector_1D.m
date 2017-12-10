@@ -1,6 +1,6 @@
 function [vec] = assemble_vector_1D( meshes, basis_config, coef_fun )
-	point_nums = length(meshes.p);
-	element_nums = point_nums - 1;
+	point_nums = length(meshes.pb);
+	element_nums = length(meshes.p) - 1;
 	local_basis_nums = basis_config.nums;
 	vec = zeros(point_nums, 1);
 

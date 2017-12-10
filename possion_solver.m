@@ -7,7 +7,7 @@ function [sol, pde_config] = possion_solver(pde_config)
 	boundary = pde_config.boundary;
 
 	[p, t] = generate_pt(mesh_config, basis_config.type);
-	[pb, tb] = generate_pt_fe_basis_fun(p, t);
+	[pb, tb] = generate_pt_fe_basis_fun(p, t, basis_config.type);
 	sol.mesh_femesh.p = p;
 	sol.mesh_femesh.t = t;
 	sol.mesh_femesh.pb = pb;
@@ -19,7 +19,7 @@ function [sol, pde_config] = possion_solver(pde_config)
 	[A, b] = treat_dirichlet_boundary(A, b, boundary, sol.mesh_femesh);
 
 	sol.sol = full(A\b)';
-	sol.sol_exact = pde_config.exact_sol((sol.mesh_femesh.p));
+	sol.sol_exact = pde_config.exact_sol((sol.mesh_femesh.pb));
 	sol.err = loss_fun(sol.sol, sol.sol_exact);
 
 	pde_config.boundary = boundary;
