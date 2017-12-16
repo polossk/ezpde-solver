@@ -16,8 +16,14 @@
 +--- your_code_2.m
 +---+ ezpde-solver\
 |   |
-|   +--- error_module\
-|   +--- ...
+|   +---+ module_core\
+|   |   |
+|   |   +---+ fem_1d_core\
+|   |   +---+ fem_2d_core\
+|   |   ...
+|   +---+ module_errors\
+|   +---+ module_solver\
+|   +---+ utils\
 | ...
 ```
 
@@ -33,7 +39,7 @@ be very generous of you!
 
 ## License
 The MIT License (MIT)
-Copyright (c) 2017 Shangkun Shen, http://polossk.com <polossk_dev@126.com>
+Copyright (c) 2017 Shangkun Shen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
