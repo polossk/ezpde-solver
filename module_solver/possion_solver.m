@@ -1,7 +1,6 @@
 function [sol, pde_config] = possion_solver(pde_config)
 	f_fun = pde_config.f_fun;
 	coef_fun = pde_config.coef_fun;
-	loss_fun = pde_config.loss_fun;
 	mesh_config = pde_config.mesh_config;
 	basis_config = pde_config.basis_config;
 	boundary = pde_config.boundary;

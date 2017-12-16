@@ -13,6 +13,11 @@ basis_config.gauss_order = 3;
 pde_config.coef_fun = @(x) exp(x);
 pde_config.f_fun = @(x) (-exp(x) .* (cos(x) - 2 * sin(x) - x .* cos(x) - x .* sin(x))); 
 pde_config.exact_sol_script = @(x) (x .* cos(x));
+
+pde_config.loss.method = 'custom';
+pde_config.loss.ev_point_nums = 4;
+pde_config.loss.loss_fun = @(x, y) max(abs(x - y));
+
 pde_config.loss_fun = @(x, y) max(abs(x - y));
 
 pde_config.mesh_config = mesh_config;
