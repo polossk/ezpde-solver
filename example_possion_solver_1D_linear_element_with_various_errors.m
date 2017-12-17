@@ -7,7 +7,7 @@ boundary_nums = 2;
 boundary_script = @(x) ((x == mesh_config.xr) .* cos(1));
 
 basis_config.type = 101;
-basis_config.nums = 2;
+basis_config.nums = generate_basis_nums(basis_config.type);
 basis_config.gauss_order = 3;
 
 pde_config.coef_fun = @(x) exp(x);
@@ -26,7 +26,7 @@ pde_config.boundary.nums = boundary_nums;
 pde_config.boundary.types = [1, 1];
 
 for method = {'L_inf', 'L2', 'H1'}
-	pde_config.loss.method = method;
+	pde_config.loss.method = method{1};
 	ns = [4, 8, 16, 32, 64, 128];
 	% ns = 4;
 	err = zeros(size(ns));

@@ -7,7 +7,7 @@ boundary_nums = 2;
 boundary_script = @(x) ((x == mesh_config.xr) .* cos(1));
 
 basis_config.type = 102;
-basis_config.nums = 3;
+basis_config.nums = generate_basis_nums(basis_config.type);
 basis_config.gauss_order = 3;
 
 pde_config.coef_fun = @(x) exp(x);

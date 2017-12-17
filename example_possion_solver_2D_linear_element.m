@@ -1,16 +1,29 @@
 include('.');
-mesh_config.xl = 0;
+mesh_config.type = 'triangular'
+mesh_config.xl = -1;
 mesh_config.xr = 1;
-mesh_config.h = 1.0/64;
+mesh_config.hx = 1.0/8;
+mesh_config.yl = -1;
+mesh_config.yr = 1;
+mesh_config.hy = 1.0/8;
 
-boundary_nums = 2;
-boundary_script = @(x) ((x == mesh_config.xr) .* cos(1));
+boundary.boundary_nums = 4;
+s1 = @(x, y) (-1.5 * y .* (1 - y) .* exp(y - 1));
+s2 = @(x, y) ( 0.5 * y .* (1 - y) .* exp(y + 1));
+s3 = @(x, y) (-x .* (2 - x) .* exp(x - 1));
+s4 = @(x, y) 0;
+b1 = @(x, y) ((x == mesh_config.xl) .* s1(x, y));
+b2 = @(x, y) ((x == mesh_config.xr) .* s2(x, y));
+b3 = @(x, y) ((x == mesh_config.yl) .* s3(x, y));
+b4 = @(x, y) ((x == mesh_config.yr) .* s4(x, y));
+boundary.script = {b1, b2, b3, b4};
+boundary.types = 1;
 
-basis_config.type = 101;
+basis_config.type = 201;
 basis_config.nums = generate_basis_nums(basis_config.type);
 basis_config.gauss_order = 3;
 
-pde_config.coef_fun = @(x) exp(x);
+pde_config.coef_fun = @(x) 1;
 pde_config.f_fun = @(x) (-exp(x) .* (cos(x) - 2 * sin(x) - x .* cos(x) - x .* sin(x))); 
 pde_config.exact_sol_script = @(x) (x .* cos(x));
 pde_config.exact_sol_script_diff1 = @(x) (cos(x) - x .* sin(x));
@@ -21,9 +34,7 @@ pde_config.loss.loss_fun = @(x, y) max(abs(x - y));
 
 pde_config.mesh_config = mesh_config;
 pde_config.basis_config = basis_config;
-pde_config.boundary.script = boundary_script;
-pde_config.boundary.nums = boundary_nums;
-pde_config.boundary.types = [1, 2];
+pde_config.boundary = boundary;
 
 ns = [4, 8, 16, 32, 64, 128];
 err = zeros(size(ns));

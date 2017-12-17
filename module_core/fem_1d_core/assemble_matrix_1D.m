@@ -10,7 +10,7 @@ function [mat] = assemble_matrix_1D( meshes, basis_config, coef_fun )
 			for jj = 1 : local_basis_nums
                 % fprintf('%02d-%02d-%02d: ', n, ii, jj);
                 % fprintf('meshes.tb(jj, n), meshes.tb(ii, n) = %d, %d\n', meshes.tb(jj, n), meshes.tb(ii, n));
-				integral_r = calc_gauss_int(v, [ii, jj], coef_fun, basis_config, 1);
+				integral_r = calc_intgl(v, [ii, jj], coef_fun, basis_config, 1);
 				mat(meshes.tb(jj, n), meshes.tb(ii, n)) = mat(meshes.tb(jj, n), meshes.tb(ii, n)) + integral_r;
 			end
 		end

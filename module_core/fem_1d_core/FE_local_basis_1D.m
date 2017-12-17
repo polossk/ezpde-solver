@@ -12,7 +12,8 @@ function [ret] = FE_local_basis_1D(...
 
 	if basis_index == 0
 		ret = 1; return;
-    end
+	end
+	
 	if basis_type == 101 % 1D linear nodal basis
 		if basis_index == 1
 			if diff_order == 0

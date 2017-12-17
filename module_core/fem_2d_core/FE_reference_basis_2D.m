@@ -1,32 +1,57 @@
-function ret = FE_reference_basis_2D(x, y, basis_type, basis_index, der_x, der_y)
+function [ret] = FE_reference_basis_2D(...
+	x, y, basis_index, basis_config, diff_order...
+	)
+% helps
+% basis_index = 0 => constant 1
+% basis_type =
+%   201: 2D linear nodal basis
+%   202: 2D quadratic nodal basis
+	basis_type = basis_config.type;
+	der_x = diff_order(1); der_y = diff_order(2);
 
-
-if basis_type == 201
-
-	if basis_index == 1
-		if der_x == 0 && der_y == 0
-			ret = x - y + 1;
-		elseif der_x == 1 && der_y == 0
-			ret = -1;
-		elseif der_x == 0 && der_y == 1
-			ret = -1;
-		elseif 
-			
-			
-
-	elseif basis_index == 2
-
-	elseif basis_index == 3
-
-	else warning(['Description']);
+	if basis_type == 201
+		if basis_index == 1
+			if der_x == 0 && der_y == 0
+				ret = -x - y + 1;
+			elseif der_x == 1 && der_y == 0
+				ret = -1;
+			elseif der_x == 0 && der_y == 1
+				ret = -1;
+			elseif (der_x + der_y) >= 2
+				ret = 0;
+			else
+				warning('@subrouting: basis_type: 201, basis_index: 1');
+				error('Wrong input for diff_order.');
+			end
+		elseif basis_index == 2
+			if der_x == 0 && der_y == 0
+				ret = x;
+			elseif der_x == 1 && der_y == 0
+				ret = 1;
+			elseif der_x >= 2 || der_y >= 1
+				ret = 0;
+			else
+				warning('@subrouting: basis_type: 201, basis_index: 2');
+				error('Wrong input for diff_order.');
+			end
+		elseif basis_index == 3
+			if der_x == 0 && der_y == 0
+				ret = y;
+			elseif der_x == 0 && der_y == 1
+				ret = 1;
+			elseif der_x >= 1 || der_y >= 2
+				ret = 0;
+			else
+				warning('@subrouting: basis_type: 201, basis_index 3');
+				error('Wrong input for diff_order.');
+			end
+		else
+			error('Wrong input for basis_index');
+		end
+	elseif basis_type == 202
+		warning(['todo']);
+	else
+		error('Wrong input for basis_type');
 	end
-		
-
-
-elseif basis_type == 202
-
-else
-
-end
 
 end
