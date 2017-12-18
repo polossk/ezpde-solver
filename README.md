@@ -29,7 +29,7 @@
 
 ## Note
 - Homework of Mathematical Foundation of Finite Element Methods
-- Naive FEM code, easy to use but no guarantee of its effectiveness
+- Naive FEM code, easy to use but no guarantee of both its effectiveness and efficiency
 - I would to give my special thanks to Prof. He for his excellent teaching
 
 ## Copyright
