@@ -33,11 +33,12 @@ fprintf('h\terr\n');
 for idx = 1:length(ns);
 	pde_config.mesh_config.h = 1.0 / ns(idx);
 	[sol, pde] = possion_solver(pde_config);
+	[sol, pde] = possion_error(sol, pde);
 	err(idx) = sol.err;
 	fprintf('1/%d\t%e\n', ns(idx), err(idx));
 end
 % result
-% h     err
+% h     max-abs-err
 % 1/4   4.659667e-05
 % 1/8   2.991841e-06
 % 1/16  1.890097e-07

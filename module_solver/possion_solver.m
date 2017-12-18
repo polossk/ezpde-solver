@@ -19,20 +19,6 @@ function [sol, pde_config] = possion_solver(pde_config)
 	
 	sol.sol = full(A\b)';
 	sol.sol_exact = pde_config.exact_sol_script(sol.mesh_femesh.pb);
-	
-	lmethod = pde_config.loss.method;
-	switch lmethod
-		case 'custom'
-			sol.err = pde_config.loss.loss_fun(sol.sol, sol.sol_exact);
-		case 'L_inf'
-			sol.err = calc_inf_error(sol, pde_config);
-		case 'L2'
-			sol.err = calc_l2_error(sol, pde_config);
-		case 'H1'
-			sol.err = calc_h1_error(sol, pde_config);
-		otherwise
-			warning(['No implementation.']);
-	end
 
 	pde_config.boundary = boundary;
 end

@@ -25,38 +25,25 @@ pde_config.boundary.script = boundary_script;
 pde_config.boundary.nums = boundary_nums;
 pde_config.boundary.types = 1;
 
-for method = {'L_inf', 'L2', 'H1'}
-	pde_config.loss.method = method{1};
-	ns = [4, 8, 16, 32, 64, 128];
-	% ns = 4;
-	err = zeros(size(ns));
-	fprintf('h\terr\n');
-	for idx = 1:length(ns);
-		pde_config.mesh_config.h = 1.0 / ns(idx);
-		[sol, pde] = possion_solver(pde_config);
-		err(idx) = sol.err;
-		fprintf('1/%d\t%e\n', ns(idx), err(idx));
+ns = [4, 8, 16, 32, 64, 128];
+method = {'L_inf', 'L2', 'H1'};
+err = zeros(length(ns), length(method));
+fprintf('h\tL_inf err\tL2 err\tH1 err\n');
+for idx = 1:length(ns);
+	pde_config.mesh_config.h = 1.0 / ns(idx);
+	[sol, pde] = possion_solver(pde_config);
+	for jj = 1 : length(method)
+		pde.loss.method = method{jj};
+		[sol, pde] = possion_error(sol, pde);
+		err(idx, jj) = sol.err;
 	end
+	fprintf('1/%d\t%e\t%e\t%e\n', ns(idx), err(idx, 1), err(idx, 2), err(idx, 3));
 end
 
-% h     L-inf err
-% 1/4   1.553899e-02
-% 1/8   4.119458e-03
-% 1/16  1.058202e-03
-% 1/32  2.680052e-04
-% 1/64  6.742689e-05
-% 1/128 1.690951e-05
-% h     L2-err
-% 1/4   7.196939e-03
-% 1/8   1.795143e-03
-% 1/16  4.485397e-04
-% 1/32  1.121197e-04
-% 1/64  2.802898e-05
-% 1/128 7.007185e-06
-% h     H1-err
-% 1/4   1.052814e-01
-% 1/8   5.273087e-02
-% 1/16  2.637626e-02
-% 1/32  1.318947e-02
-% 1/64  6.594901e-03
-% 1/128 3.297471e-03
+% h     L_inf err       L2 err          H1 err
+% 1/4   1.404062e-02    7.196939e-03    1.052814e-01
+% 1/8   3.680327e-03    1.795143e-03    5.273087e-02
+% 1/16  9.404788e-04    4.485397e-04    2.637626e-02
+% 1/32  2.375981e-04    1.121197e-04    1.318947e-02
+% 1/64  5.970435e-05    2.802898e-05    6.594901e-03
+% 1/128 1.496386e-05    7.007185e-06    3.297471e-03
