@@ -10,27 +10,27 @@
 ### Workspace Example
 
 ```plain
-+ Workspace\
-|
-+--- your_code_1.m
-+--- your_code_2.m
-+---+ ezpde-solver\
-|   |
-|   +---+ module_core\
-|   |   |
-|   |   +---+ fem_1d_core\
-|   |   +---+ fem_2d_core\
-|   |   ...
-|   +---+ module_errors\
-|   +---+ module_solver\
-|   +---+ utils\
-| ...
+Workspace\
+├── your_code_1.m
+├── your_code_2.m
+├── module_core\
+│   ├── fem_1d_core\
+│   ├── fem_2d_core\
+│   └── gaussint\
+├── module_errors\
+├── module_errors_2D\
+├── module_solver\
+└── utils\
 ```
 
 ## Note
 - Homework of Mathematical Foundation of Finite Element Methods
 - Naive FEM code, easy to use but no guarantee of both its effectiveness and efficiency
 - I would to give my special thanks to Prof. He for his excellent teaching
+
+## Cautions & Todos
+- `boundary.type` was auto pasted to the `boundary.nodes(1, :)`, which indecated the boundary element's type information. There is going to modify in an automatic way to sustain boundary type with it's boundary information.
+- please define your equation in the same way as these `example` codes.
 
 ## Copyright
 Use this code whatever you want, under the circumstances of acknowleged the
