@@ -1,4 +1,4 @@
-include('.');
+clear all; include('.');
 mesh_config.xl = 0;
 mesh_config.xr = 1;
 mesh_config.h = 1.0/64;
@@ -23,7 +23,7 @@ pde_config.mesh_config = mesh_config;
 pde_config.basis_config = basis_config;
 pde_config.boundary.script = boundary_script;
 pde_config.boundary.nums = boundary_nums;
-pde_config.boundary.types = [1, 1];
+pde_config.boundary.types = 1;
 
 for method = {'L_inf', 'L2', 'H1'}
 	pde_config.loss.method = method{1};

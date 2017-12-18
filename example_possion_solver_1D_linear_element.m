@@ -1,4 +1,4 @@
-include('.');
+clear all; include('.');
 mesh_config.xl = 0;
 mesh_config.xr = 1;
 mesh_config.h = 1.0/64;
@@ -23,7 +23,7 @@ pde_config.mesh_config = mesh_config;
 pde_config.basis_config = basis_config;
 pde_config.boundary.script = boundary_script;
 pde_config.boundary.nums = boundary_nums;
-pde_config.boundary.types = [1, 2];
+pde_config.boundary.types = 1;
 
 ns = [4, 8, 16, 32, 64, 128];
 err = zeros(size(ns));

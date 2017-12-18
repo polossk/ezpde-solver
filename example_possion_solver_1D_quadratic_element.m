@@ -1,4 +1,4 @@
-include('.');
+clear all; include('.');
 mesh_config.xl = 0;
 mesh_config.xr = 1;
 mesh_config.h = 1.0/64;
