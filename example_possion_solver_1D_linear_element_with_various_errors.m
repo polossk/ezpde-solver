@@ -16,7 +16,7 @@ pde_config.exact_sol_script = @(x) (x .* cos(x));
 pde_config.exact_sol_script_diff1 = @(x) (cos(x) - x .* sin(x));
 
 pde_config.loss.method = 'L_inf';
-pde_config.loss.ev_point_nums = 4;
+pde_config.loss.ev_point_order = 3;
 pde_config.loss.loss_fun = @(x, y) max(abs(x - y));
 
 pde_config.mesh_config = mesh_config;
@@ -32,10 +32,10 @@ for method = {'L_inf', 'L2', 'H1'}
 	err = zeros(size(ns));
 	fprintf('h\terr\n');
 	for idx = 1:length(ns);
-	    pde_config.mesh_config.h = 1.0 / ns(idx);
-	    [sol, pde] = possion_solver(pde_config);
-	    err(idx) = sol.err;
-	    fprintf('1/%d\t%e\n', ns(idx), err(idx));
+		pde_config.mesh_config.h = 1.0 / ns(idx);
+		[sol, pde] = possion_solver(pde_config);
+		err(idx) = sol.err;
+		fprintf('1/%d\t%e\n', ns(idx), err(idx));
 	end
 end
 

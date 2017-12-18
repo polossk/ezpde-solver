@@ -1,7 +1,11 @@
 function [ret] = FE_local_basis_2D(...
 	x, y, vertices, basis_index, basis_config, diff_order...
 	)
-
+	
+	if basis_index == 0
+		ret = 1; return;
+	end
+	
 	basis_type = basis_config.type;
 	der_x = diff_order(1); der_y = diff_order(2);
 

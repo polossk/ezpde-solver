@@ -13,9 +13,10 @@ basis_config.gauss_order = 3;
 pde_config.coef_fun = @(x) exp(x);
 pde_config.f_fun = @(x) (-exp(x) .* (cos(x) - 2 * sin(x) - x .* cos(x) - x .* sin(x))); 
 pde_config.exact_sol_script = @(x) (x .* cos(x));
+pde_config.exact_sol_script_diff1 = @(x) (cos(x) - x .* sin(x));
 
 pde_config.loss.method = 'custom';
-pde_config.loss.ev_point_nums = 4;
+pde_config.loss.ev_point_order = 3;
 pde_config.loss.loss_fun = @(x, y) max(abs(x - y));
 
 pde_config.loss_fun = @(x, y) max(abs(x - y));
@@ -24,15 +25,16 @@ pde_config.mesh_config = mesh_config;
 pde_config.basis_config = basis_config;
 pde_config.boundary.script = boundary_script;
 pde_config.boundary.nums = boundary_nums;
+pde_config.boundary.types = 1;
 
 ns = [4, 8, 16, 32, 64, 128];
 err = zeros(size(ns));
 fprintf('h\terr\n');
 for idx = 1:length(ns);
-    pde_config.mesh_config.h = 1.0 / ns(idx);
-    [sol, pde] = possion_solver(pde_config);
-    err(idx) = sol.err;
-    fprintf('1/%d\t%e\n', ns(idx), err(idx));
+	pde_config.mesh_config.h = 1.0 / ns(idx);
+	[sol, pde] = possion_solver(pde_config);
+	err(idx) = sol.err;
+	fprintf('1/%d\t%e\n', ns(idx), err(idx));
 end
 % result
 % h     err
