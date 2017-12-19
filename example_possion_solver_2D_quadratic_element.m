@@ -2,10 +2,10 @@ clear all; include('.');
 mesh_config.type = 'triangular';
 mesh_config.xl = -1;
 mesh_config.xr = 1;
-mesh_config.hx = 2.0/2;
+mesh_config.hx = 2.0/8;
 mesh_config.yl = -1;
 mesh_config.yr = 1;
-mesh_config.hy = 2.0/2;
+mesh_config.hy = 2.0/8;
 
 boundary.boundary_nums = 1;
 s1 = @(x, y) (-1.5 * y .* (1 - y) .* exp(y - 1));
@@ -19,7 +19,7 @@ b4 = @(x, y) ((y == mesh_config.yr) .* s4(x, y));
 boundary.script = @(x, y) (b1(x, y) + b2(x, y) + b3(x, y) + b4(x, y));
 boundary.types = 1;
 
-basis_config.type = 201;
+basis_config.type = 202;
 basis_config.nums = generate_basis_nums(basis_config.type);
 basis_config.gauss_order = 3;
 
@@ -44,8 +44,8 @@ pde_config.boundary = boundary;
 % xr = mesh_config.xr;
 % yl = mesh_config.yl;
 % yr = mesh_config.yr;
-% hx = mesh_config.hx;
-% hy = mesh_config.hy;
+% hx = mesh_config.hx / 2;
+% hy = mesh_config.hy / 2;
 % nx = (xr - xl) / hx;
 % ny = (yr - yl) / hy;
 % px = xl : hx : xr; npx = nx + 1;
@@ -54,9 +54,9 @@ pde_config.boundary = boundary;
 % u_exact = pde_config.exact_sol_script(xx, yy);
 % u = reshape(sol.sol, npy, npx);
 % figure;
-% subplot(1, 3, 1); mesh(xx, yy, u_exact);
-% subplot(1, 3, 2); mesh(xx, yy, u);
-% subplot(1, 3, 3); mesh(xx, yy, u - u_exact);
+% subplot(1, 3, 1); mesh(xx, yy, u_exact); xlabel('x');
+% subplot(1, 3, 2); mesh(xx, yy, u); xlabel('x');
+% subplot(1, 3, 3); mesh(xx, yy, u - u_exact); xlabel('x');
 
 % ns = [2, 4, 8, 16];
 ns = [2, 4, 8, 16, 32, 64, 128];
@@ -72,10 +72,10 @@ for idx = 1:length(ns);
 end
 % result
 % h     max-abs-err
-% 1/2   2.495332e-02
-% 1/4   6.697883e-03
-% 1/8   1.730405e-03
-% 1/16  4.352294e-04
-% 1/32  1.090224e-04
-% 1/64  2.726978e-05
+% 1/2   2.053777e-03
+% 1/4   1.832846e-04
+% 1/8   1.503997e-05
+% 1/16  1.129650e-06
+% 1/32  7.792216e-08
+% 1/64  5.162271e-09
 % 1/128 6.817896e-06

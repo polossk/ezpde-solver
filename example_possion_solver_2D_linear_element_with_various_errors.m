@@ -38,9 +38,8 @@ pde_config.basis_config = basis_config;
 pde_config.boundary = boundary;
 
 % [sol, pde] = possion2D_solver(pde_config);
+% [sol, pde] = possion2D_error(sol, pde);
 % err = sol.err
-
-
 % xl = mesh_config.xl;
 % xr = mesh_config.xr;
 % yl = mesh_config.yl;
