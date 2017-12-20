@@ -1,4 +1,4 @@
-function [sol, pde_config] = possion_error(sol, pde_config)
+function [sol, pde_config] = equ_error(sol, pde_config)
 	lmethod = pde_config.loss.method;
 	switch lmethod
 		case 'custom'

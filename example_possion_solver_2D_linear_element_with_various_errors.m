@@ -38,7 +38,7 @@ pde_config.basis_config = basis_config;
 pde_config.boundary = boundary;
 
 % [sol, pde] = possion2D_solver(pde_config);
-% [sol, pde] = possion2D_error(sol, pde);
+% [sol, pde] = equ_error2D(sol, pde);
 % err = sol.err
 % xl = mesh_config.xl;
 % xr = mesh_config.xr;
@@ -61,19 +61,19 @@ pde_config.boundary = boundary;
 % ns = [2];
 % ns = [2, 4, 8, 16];
 ns = [2, 4, 8, 16, 32, 64, 128];
-method = {'L_inf', 'L2', 'H1'};
+method = {'custom', 'L_inf', 'L2', 'H1'};
 err = zeros(length(ns), length(method));
-fprintf('h\tL_inf err\tL2 err\tH1 err\n');
+fprintf('h     max-abs-err     L_inf err       L2 err          H1 err\n');
 for idx = 1:length(ns);
 	pde_config.mesh_config.hx = 1.0 / ns(idx);
 	pde_config.mesh_config.hy = 1.0 / ns(idx);
 	[sol, pde] = possion2D_solver(pde_config);
 	for jj = 1 : length(method)
 		pde.loss.method = method{jj};
-		[sol, pde] = possion2D_error(sol, pde);
+		[sol, pde] = equ_error2D(sol, pde);
 		err(idx, jj) = sol.err;
 	end
-	fprintf('1/%d\t%e\t%e\t%e\n', ns(idx), err(idx, 1), err(idx, 2), err(idx, 3));
+	fprintf('1/%d\t%e\t%e\t%e\t%e\n', ns(idx), err(idx, 1), err(idx, 2), err(idx, 3), err(idx, 4));
 end
 % result
 % h     L_inf err       L2 err          H1 err

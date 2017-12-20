@@ -6,7 +6,6 @@ function [ret] = FE_local_basis_2D(...
 		ret = 1; return;
 	end
 	
-	basis_type = basis_config.type;
 	der_x = diff_order(1); der_y = diff_order(2);
 
 	x1 = vertices(1, 1);
