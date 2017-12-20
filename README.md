@@ -31,6 +31,7 @@ Workspace\
 ## Cautions & Todos
 - `boundary.type` was auto pasted to the `boundary.nodes(1, :)`, which indecated the boundary element's type information. There is going to modify in an automatic way to sustain boundary type with it's boundary information.
 - please define your equation in the same way as these `example` codes.
+- rename `equ_error*.m` to `equation_error*.m`
 
 ## Copyright
 Use this code whatever you want, under the circumstances of acknowleged the

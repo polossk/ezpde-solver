@@ -44,6 +44,7 @@ function [boundary] = generate_boundary_2D( boundary, mesh_config, meshes, basis
 			boundary.nodes = int32(zeros(2, len));
 			boundary.nodes(1, :) = boundary.types;
 			boundary.nodes(2, :) = boundary.edges(3, :);
+			boundary.endpoints = [1, (npx - 1) * npy + 1, npx * npy, npy, 1];
 		elseif basis_type == 202
 			npy = 2 * npy - 1; npx = npx * 2 - 1;
 			p1 = 1 : npy : (npx - 2) * npy + 1;
@@ -54,6 +55,7 @@ function [boundary] = generate_boundary_2D( boundary, mesh_config, meshes, basis
 			boundary.nodes = int32(zeros(2, 2 * len));
 			boundary.nodes(1, :) = boundary.types;
 			boundary.nodes(2, :) = p(1 : end - 1);
+			boundary.endpoints = [1, (npx - 1) * npy + 1, npx * npy, npy, 1];
 		else
 			warning('No implementation.');
 		end

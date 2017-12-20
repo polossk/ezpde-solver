@@ -40,7 +40,7 @@ for idx = 1:length(ns);
 	fprintf('1/%d\t%e\t%e\t%e\t%e\n', ns(idx), err(idx, 1), err(idx, 2), err(idx, 3), err(idx, 4));
 end
 
-% h     L_inf err       L2 err          H1 err
+% h     max-abs-err     L_inf err       L2 err          H1 err
 % 1/4	2.333971e-03	1.404062e-02	7.196939e-03	1.052814e-01
 % 1/8	5.831721e-04	3.680327e-03	1.795143e-03	5.273087e-02
 % 1/16	1.464455e-04	9.404788e-04	4.485397e-04	2.637626e-02
