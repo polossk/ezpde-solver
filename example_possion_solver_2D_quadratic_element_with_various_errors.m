@@ -61,9 +61,9 @@ pde_config.boundary = boundary;
 % ns = [2];
 % ns = [2, 4, 8, 16];
 ns = [2, 4, 8, 16, 32, 64, 128];
-method = {'L_inf', 'L2', 'H1'};
+method = {'custom', 'L_inf', 'L2', 'H1'};
 err = zeros(length(ns), length(method));
-fprintf('h\tL_inf err\tL2 err\tH1 err\n');
+fprintf('h\terr\tL_inf err\tL2 err\tH1 err\n');
 for idx = 1:length(ns);
 	pde_config.mesh_config.hx = 1.0 / ns(idx);
 	pde_config.mesh_config.hy = 1.0 / ns(idx);
@@ -73,14 +73,15 @@ for idx = 1:length(ns);
 		[sol, pde] = possion2D_error(sol, pde);
 		err(idx, jj) = sol.err;
 	end
-	fprintf('1/%d\t%e\t%e\t%e\n', ns(idx), err(idx, 1), err(idx, 2), err(idx, 3));
+	fprintf('1/%d\t%e\t%e\t%e\t%e\n', ns(idx), err(idx, 1), err(idx, 2), err(idx, 3), err(idx, 4));
 end
 % result
-% h     L_inf err       L2 err          H1 err
-% 1/2   2.339767e-01    9.791517e-02    7.069796e-01
-% 1/4   7.781467e-02    2.668079e-02    3.708270e-01
-% 1/8   2.239213e-02    6.833922e-03    1.877403e-01
-% 1/16  6.003198e-03    1.719393e-03    9.416670e-02
-% 1/32  1.553992e-03    4.305454e-04    4.712061e-02
-% 1/64  3.953120e-04    1.076802e-04    2.356497e-02
-% 1/128 9.969028e-05    2.692281e-05    1.178307e-02
+% h     max-abs-err     L_inf err       L2 err          H1 err
+% 1/2   2.053777e-03    1.432207e-02    6.675543e-03    1.342336e-01
+% 1/4   1.832846e-04    2.174267e-03    8.664180e-04    3.533126e-02
+% 1/8   1.503997e-05    2.997468e-04    1.092810e-04    8.950835e-03
+% 1/16  1.129650e-06    3.935364e-05    1.368942e-05    2.245258e-03
+% 1/32  7.792216e-08    5.041543e-06    1.712071e-06    5.617911e-04
+% 1/64  5.162271e-09    6.379829e-07    2.140364e-07    1.404777e-04
+% 1/128 3.347873e-10    8.023928e-08    2.675541e-08    3.512130e-05
+% Elapsed time is 12768.767043 seconds.

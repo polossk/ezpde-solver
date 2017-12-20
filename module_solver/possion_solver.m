@@ -16,7 +16,7 @@ function [sol, pde_config] = possion_solver(pde_config)
 	b = assemble_vector_1D(sol.mesh_femesh, basis_config, f_fun, 0);
 	[A, b] = treat_dirichlet_boundary(A, b, boundary, sol.mesh_femesh);
 	
-	sol.sol = full(gmres(A, b))';
+	sol.sol = full(A\b)';
 	sol.sol_exact = pde_config.exact_sol_script(sol.mesh_femesh.pb);
 
 	pde_config.boundary = boundary;
