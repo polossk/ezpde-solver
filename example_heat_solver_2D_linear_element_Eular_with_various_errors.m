@@ -9,7 +9,7 @@ mesh_config.hy = 1/2;
 mesh_config.t0 = 0;
 mesh_config.t1 = 1;
 mesh_config.th = mesh_config.hx;
-mesh_config.theta = 0.5;
+mesh_config.theta = 1;
 
 boundary.boundary_nums = 1;
 s1 = @(x, y, t) (exp(y + t));
@@ -74,7 +74,7 @@ fprintf('h     max-abs-err     L_inf err       L2 err          H1 err\n');
 for idx = 1:length(ns);
 	pde_config.mesh_config.hx = 1.0 / ns(idx);
 	pde_config.mesh_config.hy = 1.0 / ns(idx);
-	pde_config.mesh_config.th = 1.0 / ns(idx);
+	pde_config.mesh_config.th = 4.0 / ns(idx) / ns(idx) ;
 	[sol, pde] = heat2D_solver(pde_config);
 	for jj = 1 : length(method)
 		pde.loss.method = method{jj};
@@ -85,10 +85,10 @@ for idx = 1:length(ns);
 end
 % result
 % h     max-abs-err     L_inf err       L2 err          H1 err
-% 1/2   9.513485e-05    4.796730e-01    1.891876e-01    1.786118e+00
-% 1/4   6.866250e-06    1.342295e-01    4.642984e-02    8.881222e-01
-% 1/8   4.921041e-07    3.553807e-02    1.155011e-02    4.433713e-01
-% 1/16  3.134846e-08    9.145208e-03    2.883896e-03    2.215970e-01
-% 1/32  1.965541e-09    2.319745e-03    7.207463e-04    1.107874e-01
-% 1/64  1.223270e-10    5.841713e-04    1.801723e-04    5.539228e-02
-% Elapsed time is 802.664718 seconds.
+% 1/2   8.227782e-02    4.796730e-01    2.077961e-01    1.793681e+00
+% 1/4   2.906897e-02    1.342295e-01    5.818379e-02    8.910719e-01
+% 1/8   8.149709e-03    3.553807e-02    1.524567e-02    4.438637e-01
+% 1/16  2.121309e-03    9.145208e-03    3.862929e-03    2.216633e-01
+% 1/32  5.335734e-04    2.319745e-03    9.691051e-04    1.107958e-01
+% 1/64  1.337710e-04    5.841713e-04    2.424899e-04    5.539334e-02
+% Elapsed time is 10003.337414 seconds.

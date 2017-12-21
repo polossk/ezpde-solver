@@ -64,9 +64,10 @@ pde_config.boundary = boundary;
 % subplot(1, 3, 2); mesh(xx, yy, u);
 % subplot(1, 3, 3); mesh(xx, yy, u - u_exact);
 
-% ns = [2];
-% ns = [2, 4];
-ns = [2, 4, 8, 16, 32, 64];
+% ns = [4];
+% ns = [4, 8];
+ns = [4, 8, 16, 32, 64];
+ts = [8, 23, 64, 181, 512];
 % method = {'custom'};
 method = {'custom', 'L_inf', 'L2', 'H1'};
 err = zeros(length(ns), length(method));
@@ -74,7 +75,7 @@ fprintf('h     max-abs-err     L_inf err       L2 err          H1 err\n');
 for idx = 1:length(ns);
 	pde_config.mesh_config.hx = 1.0 / ns(idx);
 	pde_config.mesh_config.hy = 1.0 / ns(idx);
-	pde_config.mesh_config.th = 1.0 / ns(idx);
+	pde_config.mesh_config.th = 1.0 / ts(idx);
 	[sol, pde] = heat2D_solver(pde_config);
 	for jj = 1 : length(method)
 		pde.loss.method = method{jj};
@@ -84,11 +85,10 @@ for idx = 1:length(ns);
 	fprintf('1/%d\t%e\t%e\t%e\t%e\n', ns(idx), err(idx, 1), err(idx, 2), err(idx, 3), err(idx, 4));
 end
 % result
-% h     L_inf err       L2 err          H1 err
-% 1/2   2.339767e-01    9.791517e-02    7.069796e-01
-% 1/4   7.781467e-02    2.668079e-02    3.708270e-01
-% 1/8   2.239213e-02    6.833922e-03    1.877403e-01
-% 1/16  6.003198e-03    1.719393e-03    9.416670e-02
-% 1/32  1.553992e-03    4.305454e-04    4.712061e-02
-% 1/64  3.953120e-04    1.076802e-04    2.356497e-02
-% 1/128 9.969028e-05    2.692281e-05    1.178307e-02
+% h     max-abs-err     L_inf err       L2 err          H1 err
+% 1/4   5.556340e-04    2.183865e-03    9.981548e-04    1.312811e-02
+% 1/8   5.971986e-05    2.954009e-04    1.252787e-04    3.227846e-03
+% 1/16  6.630525e-06    3.809792e-05    1.576157e-05    8.008876e-04
+% 1/32  7.924670e-07    4.835851e-06    1.974932e-06    2.000215e-04
+% 1/64  9.609279e-08    6.090371e-07    2.472313e-07    4.997478e-05
+% Elapsed time is 12054.431790 seconds.
