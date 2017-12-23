@@ -15,3 +15,6 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Modify Git Linguist
+*.m linguist-language=Matlab
