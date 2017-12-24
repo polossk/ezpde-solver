@@ -28,8 +28,7 @@ function [w_gauss, x_gauss] = gaussint_linear(a, b, order)
 			w = [ 0.1012285363,  0.2223810345,  0.3137066459,  0.3626837834, ...
 				  0.3626837834,  0.3137066459,  0.2223810345,  0.1012285363];
 		otherwise
-			w = 0; errbnd = 'out of function abilitity.';
-			error(errbnd);
+			error('out of function abilitity.');
 	end
 	g = @(t) ((b - a) / 2 * t);
 	X = @(t) (g(t) + (b + a) / 2);

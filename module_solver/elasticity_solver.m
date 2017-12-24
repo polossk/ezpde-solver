@@ -1,4 +1,4 @@
-function [sol, pde_config] = possion2D_solver(pde_config)
+function [sol, pde_config] = elasticity_solver(pde_config)
 	f_fun = pde_config.f_fun;
 	coef_fun = pde_config.coef_fun;
 	mesh_config = pde_config.mesh_config;

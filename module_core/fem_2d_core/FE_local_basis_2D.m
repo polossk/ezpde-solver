@@ -28,32 +28,32 @@ function [ret] = FE_local_basis_2D(...
 	pyhpx = (y1 - y2) / jcb;
 	pyhpy = (x2 - x1) / jcb;
 
-	fehelp = @(ds) FE_reference_basis_2D(xh, yh, basis_index, basis_config, ds);
+	% fehelp = @(ds) FE_reference_basis_2D(xh, yh, basis_index, basis_config, ds);
 
 	if der_x == 0 && der_y == 0
-		ret = fehelp(diff_order);
+		ret = FE_reference_basis_2D(xh, yh, basis_index, basis_config, diff_order);
 	elseif der_x == 1 && der_y == 0
-		hoge = pxhpx * fehelp([1, 0]);
-		piyo = pyhpx * fehelp([0, 1]);
+		hoge = pxhpx * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [1, 0]);
+		piyo = pyhpx * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [0, 1]);
 		ret = hoge + piyo;
 	elseif der_x == 0 && der_y == 1
-		hoge = pxhpy * fehelp([1, 0]);
-		piyo = pyhpy * fehelp([0, 1]);
+		hoge = pxhpy * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [1, 0]);
+		piyo = pyhpy * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [0, 1]);
 		ret = hoge + piyo;
 	elseif der_x == 1 && der_y == 1
-		hoge = pxhpy * pxhpx * fehelp([2, 0]);
-		piyo = (pxhpy * pyhpx + pxhpx * pyhpy) * fehelp([1, 1]);
-		fuga = pyhpy * pyhpx * fehelp([0, 2]);
+		hoge = pxhpy * pxhpx * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [2, 0]);
+		piyo = (pxhpy * pyhpx + pxhpx * pyhpy) * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [1, 1]);
+		fuga = pyhpy * pyhpx * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [0, 2]);
 		ret = hoge + piyo + fuga;
 	elseif der_x == 2 && der_y == 0
-		hoge = pxhpx * pxhpx * fehelp([2, 0]);
-		piyo = 2 * pxhpx * pyhpx * fehelp([1, 1]);
-		fuga = pyhpx * pyhpx * fehelp([0, 2]);
+		hoge = pxhpx * pxhpx * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [2, 0]);
+		piyo = 2 * pxhpx * pyhpx * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [1, 1]);
+		fuga = pyhpx * pyhpx * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [0, 2]);
 		ret = hoge + piyo + fuga;
 	elseif der_x == 0 && der_y == 2
-		hoge = pxhpy * pxhpy * fehelp([2, 0]);
-		piyo = 2 * pxhpy * pyhpy * fehelp([1, 1]);
-		fuga = pyhpy * pyhpy * fehelp([0, 2]);
+		hoge = pxhpy * pxhpy * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [2, 0]);
+		piyo = 2 * pxhpy * pyhpy * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [1, 1]);
+		fuga = pyhpy * pyhpy * FE_reference_basis_2D(xh, yh, basis_index, basis_config, [0, 2]);
 		ret = hoge + piyo + fuga;
 	else
 		warning('@subrouting: FE_local_basis_2D, basis_index 3');

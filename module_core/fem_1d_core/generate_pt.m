@@ -1,4 +1,4 @@
-function [p, t, pb, tb] = generate_pt(mesh_config, basis_type)
+function [p, t] = generate_pt(mesh_config, basis_type)
 % basis_type =
 %   101: 1D linear nodal basis
 %   102: 1D quadratic nodal basis
@@ -8,13 +8,4 @@ function [p, t, pb, tb] = generate_pt(mesh_config, basis_type)
 	n = (xr - xl) / h;
 	p = xl : h : xr;
 	t = [1 : n; 2 : (n + 1)];
-	if basis_type == 101
-		pb = p; tb = t;
-	elseif basis_type == 102
-		pb = p(1) : ((p(2) - p(1)) / 2) : p(end);
-		n = length(p) - 1;
-		tb = [1:2:(2 * n - 1); 3:2:(2 * n + 1); 2:2:(2*n)];
-	else
-		warning('No implementation.');
-	end
 end
