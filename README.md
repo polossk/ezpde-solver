@@ -13,14 +13,16 @@
 Workspace\
 ├── your_code_1.m
 ├── your_code_2.m
-├── module_core\
-│   ├── fem_1d_core\
-│   ├── fem_2d_core\
-│   └── gaussint\
-├── module_errors\
-├── module_errors_2D\
-├── module_solver\
-└── utils\
+└── includes\
+    ├── module_core\
+    │   ├── error_1d_core\
+    │   ├── error_2d_core\
+    │   ├── fem_1d_core\
+    │   ├── fem_2d_core\
+    │   └── gaussint\
+    ├── module_errors\
+    ├── module_solver\
+    └── utils\
 ```
 
 ## Note
@@ -29,9 +31,9 @@ Workspace\
 - I would to give my special thanks to Prof. He for his excellent teaching
 
 ## Cautions & Todos
-- `boundary.type` was auto pasted to the `boundary.nodes(1, :)`, which indecated the boundary element's type information. There is going to modify in an automatic way to sustain boundary type with it's boundary information.
-- please define your equation in the same way as these `example` codes.
-- rename `equ_error*.m` to `equation_error*.m`
+1. `boundary.type` was auto pasted to the `boundary.nodes(1, :)`, which indecated the boundary element's type information. There is going to modify in an automatic way to sustain boundary type with it's boundary information.
+2. please define your equation in the same way as these `example` codes.
+3. **Done** <del>*rename `equ_error*.m` to `equation_error*.m`*</del>
 
 ## Copyright
 Use this code whatever you want, under the circumstances of acknowleged the
