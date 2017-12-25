@@ -18,3 +18,4 @@
 
 # Modify Git Linguist
 *.m linguist-language=Matlab
+*.p linguist-language=Matlab
