@@ -1,5 +1,5 @@
 function [ret] = FE_local_basis_1D(...
-	x, vertices, basis_index, basis_config, diff_order...
+	x, vertices, basis_index, basis_type, diff_order...
 	)
 % helps
 % basis_index = 0 => constant 1
@@ -8,7 +8,6 @@ function [ret] = FE_local_basis_1D(...
 %   102: 1D quadratic nodal basis
 
 	h = diff(vertices); h = h(1);
-	basis_type = basis_config.type;
 
 	if basis_index == 0
 		ret = 1; return;

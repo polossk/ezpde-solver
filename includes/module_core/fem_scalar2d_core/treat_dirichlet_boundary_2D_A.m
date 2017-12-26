@@ -1,4 +1,4 @@
-function [A] = treat_dirichlet_boundary_2D_A(A, boundary_config, meshes)
+function [A] = treat_dirichlet_boundary_2D_A(A, boundary, meshes)
 	boundary_nodes = boundary_config.nodes;
 	boundary_nums = size(boundary_nodes, 2);
 	for k = 1 : boundary_nums

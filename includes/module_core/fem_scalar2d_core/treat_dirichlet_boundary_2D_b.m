@@ -1,8 +1,8 @@
-function [b] = treat_dirichlet_boundary_2D_b(b, boundary_config, meshes)
-	boundary_fun = boundary_config.script;
-	boundary_nodes = boundary_config.nodes;
+function [b] = treat_dirichlet_boundary_2D_b(b, boundary, meshes)
+	boundary_fun = boundary.script;
+	boundary_nodes = boundary.nodes;
 	boundary_nums = size(boundary_nodes, 2);
-	endpoints = boundary_config.endpoints; jj = 1;
+	endpoints = boundary.endpoints; jj = 1;
 	for k = 1 : boundary_nums
 		if boundary_nodes(1, k) == 1
 			ii = boundary_nodes(2, k);

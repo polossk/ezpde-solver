@@ -58,7 +58,7 @@ pde_config.boundary = boundary;
 % subplot(1, 3, 2); mesh(xx, yy, u);
 % subplot(1, 3, 3); mesh(xx, yy, u - u_exact);
 
-% ns = [2];
+% ns = [8];
 ns = [2, 4, 8, 16];
 % ns = [2, 4, 8, 16, 32, 64, 128];
 method = {'custom', 'L_inf', 'L2', 'H1'};

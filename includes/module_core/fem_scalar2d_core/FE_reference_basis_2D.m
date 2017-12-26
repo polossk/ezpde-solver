@@ -1,12 +1,11 @@
 function [ret] = FE_reference_basis_2D(...
-	x, y, basis_index, basis_config, diff_order...
+	x, y, basis_index, basis_type, diff_order...
 	)
 % helps
 % basis_index = 0 => constant 1
 % basis_type =
 %   201: 2D linear nodal basis
 %   202: 2D quadratic nodal basis
-	basis_type = basis_config.type;
 	der_x = diff_order(1); der_y = diff_order(2);
 
 	if basis_type == 201

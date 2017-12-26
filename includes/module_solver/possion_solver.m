@@ -5,7 +5,7 @@ function [sol, pde_config] = possion_solver(pde_config)
 	basis_config = pde_config.basis_config;
 	boundary = pde_config.boundary;
 
-	[p, t] = generate_pt(mesh_config, basis_config.type);
+	[p, t] = generate_pt(mesh_config);
 	[pb, tb] = generate_pt_local(mesh_config, basis_config.type, p, t);
 	sol.mesh_femesh.p = p;
 	sol.mesh_femesh.t = t;

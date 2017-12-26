@@ -5,7 +5,7 @@ function [sol, pde_config] = heat2D_solver(pde_config)
 	basis_config = pde_config.basis_config;
 	boundary = pde_config.boundary;
 	
-	[p, t] = generate_pt_2D(mesh_config, basis_config.type);
+	[p, t] = generate_pt_2D(mesh_config);
 	[pb, tb] = generate_pt_local_2D(mesh_config, basis_config.type, p, t);
 	sol.mesh_femesh.p = p;
 	sol.mesh_femesh.t = t;

@@ -1,7 +1,4 @@
-function [p, t] = generate_pt_2D(mesh_config, basis_type)
-% basis_type =
-%   201: 2D linear nodal basis
-%   202: 2D quadratic nodal basis
+function [p, t] = generate_pt_2D(mesh_config)
 % triangular: square-based triangle mesh
 %   D --- C
 %   | \ 2 |
