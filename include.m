@@ -1,4 +1,3 @@
 function fh = include( folder )
-	fh = addpath(genpath(folder));
-	load_gaussint_coefs;
+	fh = addpath(genpath([folder, '\includes\']));
 end
