@@ -56,13 +56,14 @@ pde_config.mesh_config = mesh_config;
 pde_config.basis_config = basis_config;
 pde_config.boundary = {u1_boundary, u2_boundary};
 
-ns = [32];
-% ns = [2, 4, 8, 16];
+ns = [64, 128];
+% ns = [2, 4, 8, 16, 32];
 % ns = [2, 4, 8, 16, 32, 64, 128];
 method = {'custom', 'L_inf', 'L2', 'H1'};
 % method = {'custom'};
 err = zeros(2, length(ns), length(method));
 for idx = 1:length(ns);
+	tic
 	pde_config.mesh_config.hx = 1.0 / ns(idx);
 	pde_config.mesh_config.hy = 1.0 / ns(idx);
 	[sol, pde] = elasticity_solver(pde_config);
@@ -72,7 +73,8 @@ for idx = 1:length(ns);
 		err(1, idx, jj) = sol.err.u1;
 		err(2, idx, jj) = sol.err.u2;
 	end
-	fprintf('ns = %d: done.\n', ns(idx));
+	fprintf('ns = %d: done. ', ns(idx));
+	toc
 end
 
 for kdx = 1:2
@@ -95,6 +97,8 @@ end
 % 1/8   5.180036e-05    4.919714e-03    1.690982e-03    6.001864e-02
 % 1/16  1.276328e-05    1.270089e-03    4.231547e-04    2.999175e-02
 % 1/32  3.114593e-06    3.226843e-04    1.058619e-04    1.499367e-02
+% 1/64  7.672348e-07    8.132544e-05    2.647655e-05    7.496559e-03
+% 1/128 1.904420e-07    2.041373e-05    6.620708e-06    3.748245e-03
 % u2 error:
 % h     max-abs-err     L_inf err       L2 err          H1 err
 % 1/2   1.847288e-02    2.614994e-02    9.545408e-03    1.721748e-01
@@ -102,3 +106,5 @@ end
 % 1/8   1.756637e-03    1.395369e-03    3.483584e-04    2.825345e-02
 % 1/16  4.638766e-04    3.688796e-04    8.256522e-05    1.385259e-02
 % 1/32  1.190608e-04    9.470267e-05    2.034809e-05    6.935153e-03
+% 1/64  3.015702e-05    2.398883e-05    5.068830e-06    3.479679e-03
+% 1/128 7.588987e-06    6.036858e-06    1.266133e-06    1.744099e-03
