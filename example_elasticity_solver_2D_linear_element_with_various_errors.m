@@ -62,7 +62,7 @@ ns = [64, 128];
 method = {'custom', 'L_inf', 'L2', 'H1'};
 % method = {'custom'};
 err = zeros(2, length(ns), length(method));
-for idx = 1:length(ns);
+for idx = 1:length(ns)
 	tic
 	pde_config.mesh_config.hx = 1.0 / ns(idx);
 	pde_config.mesh_config.hy = 1.0 / ns(idx);
