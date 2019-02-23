@@ -1,3 +1,3 @@
 function fh = include( folder )
-	fh = addpath(genpath([folder, '\includes\']));
+	fh = addpath(genpath(fullfile(folder, 'includes')));
 end

@@ -34,8 +34,11 @@ function [sol, pde_config] = elasticity_solver(pde_config)
 
 	A = [A1 + 2 * A2 + A3, A4 + A5; A6 + A7, A8 + 2 * A9 + AX];
 	b = [b1; b2];
+    
+    fprintf('before treat boundary, condest(A)= %f\n', condest(A));
 	[A, b] = treat_dirichlet_boundary_2Ds(A, b, boundarys, sol.mesh_femesh, [1, 2]);
-
+    fprintf('after treat boundary, condest(A)= %f\n', condest(A));
+    
 	u = full(A\b)';
 	ulen = length(pb1(1, :));
 	sol.sol.u1 = u(1 : ulen);
